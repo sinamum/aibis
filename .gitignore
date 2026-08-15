@@ -1,0 +1,23 @@
+.DS_Store
+# Terraform — o estado carrega dados sensíveis em texto claro e o repositório é público
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.tfstate.lock.info
+crash.log
+crash.*.log
+# Arquivo de plano: carrega a configuração resolvida, incluindo valores sensíveis
+tfplan
+*.tfplan
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# tfvars carregam valores de ambiente; o exemplo é versionado
+*.tfvars
+*.tfvars.json
+!*.tfvars.example
+
+# O lock de provedores DEVE ser versionado — garante o mesmo provider em máquinas diferentes
+!.terraform.lock.hcl

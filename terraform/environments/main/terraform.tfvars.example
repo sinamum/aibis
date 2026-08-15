@@ -1,0 +1,28 @@
+# Valores do ambiente `dev`.
+#
+# `*.tfvars` é ignorado pelo controle de versão (ver .gitignore), e é este
+# arquivo que vai versionado. A partir de um clone limpo:
+#
+#   cp terraform.tfvars.example terraform.tfvars
+#
+# Os valores abaixo são os de fato usados em `dev` — nenhum deles é sensível.
+# Nada aqui carrega credencial: a autenticação na AWS vem do ambiente de quem
+# executa, nunca de arquivo do repositório.
+
+region      = "us-east-1"
+environment = "dev"
+
+cluster_name = "kube-news"
+# Suporte padrão da AWS em 2026-07-26: 1.36, 1.35, 1.34, 1.33.
+cluster_version = "1.36"
+
+vpc_cidr = "10.0.0.0/16"
+azs      = ["us-east-1a", "us-east-1b"]
+
+public_subnet_cidrs  = ["10.0.0.0/20", "10.0.16.0/20"]
+private_subnet_cidrs = ["10.0.32.0/20", "10.0.48.0/20"]
+
+node_instance_types = ["t3.medium"]
+node_desired_size   = 2
+node_min_size       = 2
+node_max_size       = 3

@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: favorite-go-main
+  namespace: argocd
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/sibelly/k8s-fundamentals.git
+    targetRevision: main
+    path: apps/favorite-go/overlays/main
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: favorite-go-main
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true
