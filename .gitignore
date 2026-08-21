@@ -27,3 +27,7 @@ override.tf.json
 
 .env
 .venv/
+
+__pycache__/
+*.py[cod]
+*$py.class
