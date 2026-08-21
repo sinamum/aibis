@@ -8,7 +8,7 @@ locals {
   name = "${var.cluster_name}-${var.environment}"
 
   tags = {
-    Project     = "kube-news"
+    Project     = "aibis"
     Environment = var.environment
     ManagedBy   = "terraform"
   }

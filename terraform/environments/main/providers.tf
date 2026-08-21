@@ -2,14 +2,6 @@ provider "aws" {
   region = var.region
 }
 
-data "aws_eks_cluster_auth" "this" {
-  name = module.eks.cluster_name
-
-  depends_on = [
-    module.eks
-  ]
-}
-
 provider "helm" {
   kubernetes = {
     host = module.eks.cluster_endpoint
@@ -18,7 +10,18 @@ provider "helm" {
       module.eks.cluster_certificate_authority_data
     )
 
-    token = data.aws_eks_cluster_auth.this.token
+    exec = {
+      api_version = "client.authentication.k8s.io/v1beta1"
+      command     = "aws"
+      args = [
+        "eks",
+        "get-token",
+        "--cluster-name",
+        module.eks.cluster_name,
+        "--region",
+        var.region
+      ]
+    }
   }
 }
 
@@ -29,7 +32,21 @@ provider "kubectl" {
     module.eks.cluster_certificate_authority_data
   )
 
-  token = data.aws_eks_cluster_auth.this.token
+  load_config_file  = false
+  apply_retry_count = 5
+  lazy_load         = true
 
-  load_config_file = false
+  exec {
+    api_version = "client.authentication.k8s.io/v1beta1"
+    command     = "aws"
+
+    args = [
+      "eks",
+      "get-token",
+      "--cluster-name",
+      module.eks.cluster_name,
+      "--region",
+      var.region
+    ]
+  }
 }
