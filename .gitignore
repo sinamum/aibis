@@ -1,4 +1,7 @@
+# macOS
 .DS_Store
+**/.DS_Store
+
 # Terraform — o estado carrega dados sensíveis em texto claro e o repositório é público
 *.tfstate
 *.tfstate.*
@@ -21,3 +24,6 @@ override.tf.json
 
 # O lock de provedores DEVE ser versionado — garante o mesmo provider em máquinas diferentes
 !.terraform.lock.hcl
+
+.env
+.venv/

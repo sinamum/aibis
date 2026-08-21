@@ -12,7 +12,7 @@
 region      = "us-east-1"
 environment = "dev"
 
-cluster_name = "kube-news"
+cluster_name = "aibis"
 # Suporte padrão da AWS em 2026-07-26: 1.36, 1.35, 1.34, 1.33.
 cluster_version = "1.36"
 
